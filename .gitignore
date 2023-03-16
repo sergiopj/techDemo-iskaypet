@@ -1,0 +1,9 @@
+node_modules
+dist
+lib
+.vscode
+logs
+npm-debug.log
+.DS_Store
+build
+database.sqlite
