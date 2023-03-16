@@ -34,6 +34,10 @@ _Nota: Si se quiere acceder al sistema de archivos del contenedor para verificar
 docker exec -it docker_image_name /bin/bash
 ```
 
+## Aplicación desplegada en un servidor público:
+
+Url -- [Skypet-demo-api](https://api-iskaypetdem.onrender.com).
+
 ## Endpoints
 
 La API REST cuenta con los siguientes endpoints:
