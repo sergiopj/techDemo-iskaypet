@@ -1,5 +1,5 @@
 'use strict';
-import { IPet, IPetWithDataValues } from '../../src/database/models/pet.model';
+import { IPetWithDataValues } from '../../src/database/models/pet.model';
 import {
   addNewPetService,
   getAllPetsService,
