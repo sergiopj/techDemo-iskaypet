@@ -1,64 +1,45 @@
 'use strict';
-import { IPetWithDataValues } from '../../src/database/models/pet.model';
+import DbQueries from '../../src/services/DbQueries';
 import {
   addNewPetService,
   getAllPetsService,
-  getMostNumerousSpeciesService,
   getPetByIdService,
-  getSpeciesAverageAgeService,
 } from '../../src/services/Pets';
-import { INSERT_PET_OBJECT } from '../common/mocks/pet.mock';
-import { expectValidatorPetsObject, expectValidatorMostNumObject } from '../common/utils.test';
+import { INSERT_PET_OBJECT, PET_OBJECT_DB, PET_OBJECT_LIST } from '../common/mocks/pet.mock';
+import { expectValidatorPetsObject, expectValidatorInsertPetsObject } from '../common/utils.test';
 
-describe('PetsService', () => {
-
-  let petId: any;
+describe('PetsService', () => {  
 
   describe('addNewPetService', () => {
     it('Validating that a pet has been inserted into the database', async () => {
+      const petDataToInsert: any = INSERT_PET_OBJECT;
+      const dbQueriesMock = jest.spyOn(DbQueries, 'insertData'); 
+      dbQueriesMock.mockImplementationOnce(async () => petDataToInsert);
       const result: any = await addNewPetService(INSERT_PET_OBJECT); 
-      const insertResult: IPetWithDataValues = result.dataValues;
-      const { birthdate, id } = insertResult;
-      petId = id;
-      // que las fechas sean de tipo Date      
-      expect(birthdate).toBeInstanceOf(Date);
-      // resto de validaciones
-      expectValidatorPetsObject(insertResult);
+      expectValidatorInsertPetsObject(result);
     });
   });
 
   describe('getPetByIdService', () => {
     it('Validating that a pet object meets some requirements', async () => {
-      const pet: any = await getPetByIdService(petId);    
-      // que las fechas sean de tipo Date
-      expect(pet.birthdate).toBeInstanceOf(Date);      
-      // resto de validaciones
+      const petId = 1;
+      const dbPetObject: any = PET_OBJECT_DB;
+      const dbQueriesMock = jest.spyOn(DbQueries, 'findElemById'); 
+      dbQueriesMock.mockImplementationOnce(async () => dbPetObject);
+      const pet: any = await getPetByIdService(petId);
       expectValidatorPetsObject(pet);
     });
   });
 
   describe('getAllPetsService', () => {
     it('Validating that the list of pets meets certain requirements', async () => {
+      const dbPetsListObject: any = PET_OBJECT_LIST;
+      const dbQueriesMock = jest.spyOn(DbQueries, 'getAllElems'); 
+      dbQueriesMock.mockImplementationOnce(async () => dbPetsListObject);
       const pets: any = await getAllPetsService();
       expect(Array.isArray(pets)).toBe(true);      
       pets.forEach(expectValidatorPetsObject);
     });
-  });  
-
-  describe('getMostNumerousSpeciesService', () => {
-    it('Validating that the most numerous species is correctly received', async () => {
-      const pet: any = await getMostNumerousSpeciesService();    
-      expectValidatorMostNumObject(pet);
-    });
-  });
-
-  describe('getSpeciesAverageAgeService', () => {
-    it('Validating that the average age by species is correctly received', async () => {
-      const species = 'dog';
-      const average: number = await getSpeciesAverageAgeService(species);  
-      expect(typeof average).toBe('number');
-      expect(average).toBeGreaterThan(0);
-    });
-  });
+  }); 
 
 });

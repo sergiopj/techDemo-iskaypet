@@ -3,17 +3,16 @@ import { Logger } from '../../src/services/Logger';
 import { OBJECT_LOGGER } from '../common/mocks/logger.mock';
 
 describe("LoggerService", () => {
-    it("Para de generar un logger basico", () => {
-      // Generar un logger y verificar que no es nulo o indefinido
-      const logger: Logger = Logger.getLogger('::TEST | mensaje de log de testeo');
+    it("verification to generate a basic log trace", () => {
+      // Generate a logger and verify that it is not null or undefined
+      const logger: Logger = Logger.getLogger('::TEST | test log message');
       expect(logger).toBeDefined();
-      expect(logger).not.toBeNull();
-  
-      // el objeto de logger generado debe de ser el esperado      
+      expect(logger).not.toBeNull();  
+      // the generated logger object should be as expected    
       expect(logger).toMatchObject(OBJECT_LOGGER);
     });
   
-    it("Para iniciar el logger correctamente sin errores", () => {
+    it("verification to start the logger correctly without errors", () => {
       expect(() => { Logger.initLogger(); }).not.toThrowError();
     });
   });

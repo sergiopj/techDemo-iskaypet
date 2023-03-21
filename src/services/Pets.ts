@@ -2,7 +2,7 @@
 import { IPet, Pet } from '../database/models/pet.model';
 import { Sequelize } from 'sequelize';
 import DbQueries from './DbQueries';
-import { ArithmeticCalcs } from './ArithmeticCalcs';
+import { Calculation } from './Calculation';
 
 /**
  * Function to get all pets
@@ -74,7 +74,7 @@ const getSpeciesAverageAgeService = async (species: string): Promise<number> => 
       }
     };
     const pets: Pet[] = await DbQueries.findElemsByQuerie(querie); 
-    const averageAge: number = parseFloat(ArithmeticCalcs.calculateAverageAge(pets).toFixed(2));   
+    const averageAge: number = Calculation.calculateAverageAge(pets);   
     return averageAge;      
   } catch (error: unknown) {
     const message: string = error instanceof Error
@@ -96,7 +96,7 @@ const getSpeciesStandarDeviationService = async (species: string): Promise<numbe
       }
     };
     const pets: Pet[] = await DbQueries.findElemsByQuerie(querie);
-    const standarDeviation: number = ArithmeticCalcs.calculateStandarDeviation(pets);    
+    const standarDeviation: number = Calculation.calculateStandarDeviation(pets);    
     return standarDeviation;  
   } catch (error: unknown) {
     const message: string = error instanceof Error

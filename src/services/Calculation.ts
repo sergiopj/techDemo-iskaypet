@@ -2,7 +2,7 @@
 import moment from 'moment';
 import { Pet } from '../database/models/pet.model';
 
-export class ArithmeticCalcs {
+export class Calculation {
 
   /** receives the date of birth and returns the age based on the current date 
    * @param birthdate
@@ -45,7 +45,7 @@ export class ArithmeticCalcs {
     const averageAge = pets.reduce((sum, pet) => {
       return sum + this.calculateAgeInYears(pet.dataValues.birthdate);
     }, 0) / pets.length;
-    return averageAge;
+    return parseFloat(averageAge.toFixed(2))
   }
 
   

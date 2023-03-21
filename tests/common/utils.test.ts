@@ -13,6 +13,17 @@ export const expectValidatorPetsObject = (pet: IPet) => {
   expect(typeof pet.gender).toBe('string');
 }
 
+export const expectValidatorInsertPetsObject = (pet: IPet) => {
+  expect(pet).toHaveProperty('name');
+  expect(typeof pet.name).toBe('string');
+  expect(pet).toHaveProperty('species');
+  expect(typeof pet.birthdate).toMatch(/^(string|object)$/);
+  expect(pet).toHaveProperty('birthdate');
+  expect(typeof pet.species).toBe('string');
+  expect(pet).toHaveProperty('gender');
+  expect(typeof pet.gender).toBe('string');
+}
+
 export const expectValidatorResponses = (elem: IParamsValidator) => {
   expect(elem).toHaveProperty("msg");
   expect(typeof elem.msg).toBe("string");
