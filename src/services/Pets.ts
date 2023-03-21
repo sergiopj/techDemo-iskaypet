@@ -2,7 +2,7 @@
 import { IPet, Pet } from '../database/models/pet.model';
 import { Sequelize } from 'sequelize';
 import DbQueries from './DbQueries';
-import { Dates } from '../services/Dates';
+import { ArithmeticCalcs } from './ArithmeticCalcs';
 
 /**
  * Function to get all pets
@@ -66,7 +66,29 @@ const getMostNumerousSpeciesService = async (): Promise<Pet | null> => {
  * Function to obtain the average age among all pets
  * @returns {Promise<number>}
  */
-const getSpeciesAverageAgeService = async (species: any): Promise<number> => {
+const getSpeciesAverageAgeService = async (species: string): Promise<number> => {
+  try {
+    const querie: object = {
+      where: {
+        species
+      }
+    };
+    const pets: Pet[] = await DbQueries.findElemsByQuerie(querie); 
+    const averageAge: number = parseFloat(ArithmeticCalcs.calculateAverageAge(pets).toFixed(2));   
+    return averageAge;      
+  } catch (error: unknown) {
+    const message: string = error instanceof Error
+        ? error.message 
+        : 'Unknown Error';
+    throw new Error(`Error getting species average age - error: ${message}`);
+  }
+};
+
+/**
+ * Function to obtain the standar deviation among all pets
+ * @returns {Promise<number>}
+ */
+const getSpeciesStandarDeviationService = async (species: string): Promise<number> => {
   try {
     const querie: object = {
       where: {
@@ -74,15 +96,13 @@ const getSpeciesAverageAgeService = async (species: any): Promise<number> => {
       }
     };
     const pets: Pet[] = await DbQueries.findElemsByQuerie(querie);
-    const totalAge: number = pets.reduce((sum, pet) => {
-      return sum + Dates.calculateAgeInYears(pet.dataValues.birthdate);
-    }, 0);  
-    return(Math.ceil(totalAge / pets.length));    
+    const standarDeviation: number = ArithmeticCalcs.calculateStandarDeviation(pets);    
+    return standarDeviation;  
   } catch (error: unknown) {
     const message: string = error instanceof Error
         ? error.message 
         : 'Unknown Error';
-    throw new Error(`Error getting species average age - error: ${message}`);
+    throw new Error(`Error getting species standar deviation - error: ${message}`);
   }
 };
 
@@ -108,4 +128,11 @@ const addNewPetService = async (data: IPet): Promise<Pet> => {
   }
 };
 
-export { getAllPetsService, getPetByIdService, getMostNumerousSpeciesService, getSpeciesAverageAgeService, addNewPetService };
+export {
+  getAllPetsService,
+  getPetByIdService,
+  getMostNumerousSpeciesService,
+  getSpeciesAverageAgeService,
+  getSpeciesStandarDeviationService,
+  addNewPetService,
+};

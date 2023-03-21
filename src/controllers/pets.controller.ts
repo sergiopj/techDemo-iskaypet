@@ -1,7 +1,14 @@
 'use strict';
 import { Request, Response } from 'express';
 import { Pet } from '../database/models/pet.model';
-import { getAllPetsService, getPetByIdService, getMostNumerousSpeciesService, getSpeciesAverageAgeService, addNewPetService } from '../services/Pets';
+import {
+  getAllPetsService,
+  getPetByIdService,
+  getMostNumerousSpeciesService,
+  getSpeciesAverageAgeService,
+  addNewPetService,
+  getSpeciesStandarDeviationService,
+} from "../services/Pets";
 import { Logger } from '../services/Logger';
 const logger = Logger.getLogger('pets.controller');
 
@@ -75,10 +82,11 @@ const getMostNumerousSpecies = async (req: Request, res: Response) => {
 const getSpeciesAverageAge = async (req: Request, res: Response) => {
   try {
     const { species_name } = req.query;
-    const speciesAverage: number = await getSpeciesAverageAgeService(species_name);
+    const speciesAverage: number = await getSpeciesAverageAgeService(String(species_name));
+    const standarDeviation: number = await getSpeciesStandarDeviationService(String(species_name));
     logger.info('::getSpeciesAverageAge | Start the process begins to obtain the species average age');
     speciesAverage 
-        ? res.status(200).send({speciesAverage})
+        ? res.status(200).send({speciesAverage, standarDeviation})
         : res.status(404).send({msg: 'Species average afe not found'}); 
   } catch (error) {     
     logger.error(`::getSpeciesAverageAge | Error getting species average age - error : ${error}`);
