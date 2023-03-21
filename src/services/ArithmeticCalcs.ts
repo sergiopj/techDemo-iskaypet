@@ -19,9 +19,9 @@ export class ArithmeticCalcs {
    */  
   static calculateStandarDeviation(pets: Pet[]): number {
     // square root of arithmetic mean
-    const averageAge: any = this.calculateAverageAge(pets)
+    const averageAge: number = this.calculateAverageAge(pets)
     // subtract each year from the average number of years
-    const ageAverageDif = pets.map((pet: any) => {
+    const ageAverageDif = pets.map((pet: Pet) => {
       return this.calculateAgeInYears(pet.dataValues.birthdate) - averageAge;
     });
     // square each difference
