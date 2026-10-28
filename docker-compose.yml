@@ -39,7 +39,7 @@ services:
     environment:
       POSTGRES_DB: animalClinic
       POSTGRES_USER: "animalclinic"
-      POSTGRES_PASSWORD: "localdev"
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in your local .env file}
     ports:
       - "5432:5432"
     volumes:

@@ -1,0 +1,115 @@
+{
+  "planHash": "64948fbe9b143087ca32ef41c91aedb83fc74758d04a0a647eff736b681e0b3d",
+  "phase": "baseline",
+  "recordedAtUtc": "2026-10-28T12:25:38.4404830Z",
+  "retryCount": 0,
+  "resetBaseline": true,
+  "complete": true,
+  "result": {
+    "setupSucceeded": true,
+    "setupDurationMs": 58003,
+    "setupFailureOutput": null,
+    "assertions": [
+      {
+        "name": "typescript-build",
+        "kind": "process",
+        "verificationMethod": "exit-code",
+        "passed": true,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": 0,
+        "outputSample": "\r\n\u003E animal-clinic-backend@1.0.0 build\r\n\u003E tsc -p tsconfig.build.json\r\n\r\n",
+        "durationMs": 6846
+      },
+      {
+        "name": "tests-pass",
+        "kind": "process",
+        "verificationMethod": "test-results",
+        "passed": true,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": 0,
+        "outputSample": "\r\n\u003E animal-clinic-backend@1.0.0 test\r\n\u003E npx jest --runInBand\r\n\r\nPASS tests/controllers/controllers.test.ts\r\n  \u25CF Console\r\n\r\n    console.log\r\n      testtstsst\r\n\r\n      at src/app.ts:26:13\r\n\r\n\u001B[32m[2026-10-28T13:25:32.623] [INFO] pets.controller - \u001B[39m::getAllPets | Start the process begins to obtaining all pets begins\r\n\u001B[32m[2026-10-28T13:25:32.640] [INFO] pets.controller - \u001B[39m::getAllPets | Start the process begins to obtaining all pets begins\r\n\u001B[91m[2026-10-28T13:25:32.646] [ERROR] pets.controller - \u001B[39m::getAllPets | Error trying to get all pets - error : Error: Force database error test\r\n\u001B[32m[2026-10-28T13:25:32.653] [INFO] pets.controller - \u001B[39m::getPetById | Start the process begins to obtaining pet by id : 641a2b3c4d5e6f7g8h9i0j1k\r\n\u001B[32m[2026-10-28T13:25:32.659] [INFO] pets.controller - \u001B[39m::getPetById | Start the process begins to obtaining pet by id : 641a2b3c4d5e6f7g8h9i0j9z\r\n\u001B[91m[2026-10-28T13:25:32.664] [ERROR] pets.controller - \u001B[39m::getPetById | Error getting pet by id - error : Error: Force error\r\n\u001B[32m[2026-10-28T13:25:32.669] [INFO] pets.controller - \u001B[39m::getMostNumerousSpecies | Start the process begins to obtain the most numerous species\r\n\u001B[91m[2026-10-28T13:25:32.674] [ERROR] pets.controller - \u001B[39m::getMostNumerousSpecies | Error getting most numerous species - error : Error: Force error\r\n\u001B[32m[2026-10-28T13:25:32.694] [INFO] pets.controller - \u001B[39m::addNewPet | Start the process begins to insertion of a new pet\r\nPASS tests/services/pet.test.ts\r\nPASS tests/pets/infrastructure/persistence/pet.mapper.test.ts\r\nPASS tests/services/logger.test.ts\r\nPASS tests/services/calculation.test.ts\r\nPASS tests/pets/application/use-cases/get-all-pets.use-case.test.ts\r\n\r\nTest Suites: 6 passed, 6 total\r\nTests:       22 passed, 22 total\r\nSnapshots:   0 total\r\nTime:        4.951 s, estimated 91 s\r\nRan all test suites.\r\n",
+        "durationMs": 6928,
+        "testResults": {
+          "testFramework": "jest",
+          "runnerDetectedFrom": "package_json",
+          "testsTotal": 22,
+          "testsPassed": 22,
+          "testsFailed": 0,
+          "testsSkipped": 0,
+          "parseFailed": false
+        }
+      },
+      {
+        "name": "health-endpoint-200",
+        "kind": "http-probe",
+        "verificationMethod": "http-status",
+        "passed": true,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": null,
+        "outputSample": "HTTP 200\nOk\n--- server output ---\n\r\n\u003E animal-clinic-backend@1.0.0 start\r\n\u003E ts-node-dev --respawn ./src/server.ts\r\n\r\n[INFO] 13:25:34 ts-node-dev ver. 2.0.0 (using ts-node ver. 10.9.2, typescript ver. 4.9.5)\r\n\u001B[32m[2026-10-28T13:25:38.054] [INFO] server - \u001B[39mServer initialized on port - 3101\r\n\u001B[32m[2026-10-28T13:25:38.078] [INFO] DbRun - \u001B[39mConnection to database has been established successfully.\r\ntesttstsst\r\n",
+        "durationMs": 4828
+      }
+    ],
+    "executions": [
+      {
+        "source": "setup[0]",
+        "resolvedExecutable": "C:\\Users\\Usuario\\AppData\\Local\\Author Software\\nvm\\.nodejs\\npm.EXE",
+        "args": [
+          "ci",
+          "--prefer-offline",
+          "--no-audit",
+          "--no-fund"
+        ],
+        "cwd": "C:\\Users\\Usuario\\Documents\\WORKSPACE\\techDemo-iskaypet",
+        "env": {},
+        "prependPath": [],
+        "platform": "win32"
+      },
+      {
+        "source": "typescript-build",
+        "resolvedExecutable": "C:\\Users\\Usuario\\AppData\\Local\\Author Software\\nvm\\.nodejs\\npm.EXE",
+        "args": [
+          "run",
+          "build"
+        ],
+        "cwd": "C:\\Users\\Usuario\\Documents\\WORKSPACE\\techDemo-iskaypet",
+        "env": {},
+        "prependPath": [],
+        "platform": "win32"
+      },
+      {
+        "source": "tests-pass",
+        "resolvedExecutable": "C:\\Users\\Usuario\\AppData\\Local\\Author Software\\nvm\\.nodejs\\npm.EXE",
+        "args": [
+          "test",
+          "--",
+          "--runInBand"
+        ],
+        "cwd": "C:\\Users\\Usuario\\Documents\\WORKSPACE\\techDemo-iskaypet",
+        "env": {},
+        "prependPath": [],
+        "platform": "win32"
+      },
+      {
+        "source": "health-endpoint-200",
+        "resolvedExecutable": "C:\\Users\\Usuario\\AppData\\Local\\Author Software\\nvm\\.nodejs\\npm.EXE",
+        "args": [
+          "run",
+          "start"
+        ],
+        "cwd": "C:\\Users\\Usuario\\Documents\\WORKSPACE\\techDemo-iskaypet",
+        "env": {
+          "PORT": "3101"
+        },
+        "prependPath": [],
+        "platform": "win32"
+      }
+    ]
+  }
+}

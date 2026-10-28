@@ -6,7 +6,7 @@ const logger = Logger.getLogger('server');
 const port = process.env.PORT || 3000;
 
 app.listen(port, () =>{
-    DBConfig.connectDB();
+    void DBConfig.connectDB();
     logger.info(`Server initialized on port - ${port}`)
 });  
   

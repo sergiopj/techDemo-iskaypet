@@ -1,0 +1,115 @@
+{
+  "planHash": "64948fbe9b143087ca32ef41c91aedb83fc74758d04a0a647eff736b681e0b3d",
+  "phase": "postupgrade",
+  "recordedAtUtc": "2026-10-28T12:32:05.6489792Z",
+  "retryCount": 1,
+  "resetBaseline": false,
+  "complete": true,
+  "result": {
+    "setupSucceeded": true,
+    "setupDurationMs": 65279,
+    "setupFailureOutput": null,
+    "assertions": [
+      {
+        "name": "typescript-build",
+        "kind": "process",
+        "verificationMethod": "exit-code",
+        "passed": true,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": 0,
+        "outputSample": "\r\n\u003E animal-clinic-backend@1.0.0 build\r\n\u003E tsc -p tsconfig.build.json\r\n\r\n",
+        "durationMs": 2033
+      },
+      {
+        "name": "tests-pass",
+        "kind": "process",
+        "verificationMethod": "test-results",
+        "passed": true,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": 0,
+        "outputSample": "\r\n\u003E animal-clinic-backend@1.0.0 test\r\n\u003E npx jest --runInBand\r\n\r\nts-jest[config] (WARN) \u001B[94mmessage\u001B[0m\u001B[90m TS151002: \u001B[0mUsing hybrid module kind (Node16/18/Next) is only supported in \u0022isolatedModules: true\u0022. Please set \u0022isolatedModules: true\u0022 in your tsconfig.json. To disable this message, you can set \u0022diagnostics.ignoreCodes\u0022 to include 151002 in your ts-jest config. See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/options/diagnostics\r\nts-jest[config] (WARN) \u001B[94mmessage\u001B[0m\u001B[90m TS151002: \u001B[0mUsing hybrid module kind (Node16/18/Next) is only supported in \u0022isolatedModules: true\u0022. Please set \u0022isolatedModules: true\u0022 in your tsconfig.json. To disable this message, you can set \u0022diagnostics.ignoreCodes\u0022 to include 151002 in your ts-jest config. See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/options/diagnostics\r\nts-jest[config] (WARN) \u001B[94mmessage\u001B[0m\u001B[90m TS151002: \u001B[0mUsing hybrid module kind (Node16/18/Next) is only supported in \u0022isolatedModules: true\u0022. Please set \u0022isolatedModules: true\u0022 in your tsconfig.json. To disable this message, you can set \u0022diagnostics.ignoreCodes\u0022 to include 151002 in your ts-jest config. See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/options/diagnostics\r\nts-jest[config] (WARN) \u001B[94mmessage\u001B[0m\u001B[90m TS151002: \u001B[0mUsing hybrid module kind (Node16/18/Next) is only supported in \u0022isolatedModules: true\u0022. Please set \u0022isolatedModules: true\u0022 in your tsconfig.json. To disable this message, you can set \u0022diagnostics.ignoreCodes\u0022 to include 151002 in your ts-jest config. See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/options/diagnostics\r\nts-jest[config] (WARN) \u001B[94mmessage\u001B[0m\u001B[90m TS151002: \u001B[0mUsing hybrid module kind (Node16/18/Next) is only supported in \u0022isolatedModules: true\u0022. Please set \u0022isolatedModules: true\u0022 in your tsconfig.json. To disable this message, you can set \u0022diagnostics.ignoreCodes\u0022 to include 151002 in your ts-jest config. See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/options/diagnostics\r\nts-jest[config] (WARN) \u001B[94mmessage\u001B[0m\u001B[90m TS151002: \u001B[0mUsing hybrid module kind (Node16/18/Next) is only supported in \u0022isolatedModules: true\u0022. Please set \u0022isolatedModules: true\u0022 in your tsconfig.json. To disable this message, you can set \u0022diagnostics.ignoreCodes\u0022 to include 151002 in your ts-jest config. See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/options/diagnostics\r\nts-jest[config] (WARN) \u001B[94mmessage\u001B[0m\u001B[90m TS151002: \u001B[0mUsing hybrid module kind (Node16/18/Next) is only supported in \u0022isolatedModules: true\u0022. Please set \u0022isolatedModules: true\u0022 in your tsconfig.json. To disable this message, you can set \u0022diagnostics.ignoreCodes\u0022 to include 151002 in your ts-jest config. See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/options/diagnostics\r\nts-jest[config] (WARN) \u001B[94mmessage\u001B[0m\u001B[90m TS151002: \u001B[0mUsing hybrid module kind (Node16/18/Next) is only supported in \u0022isolatedModules: true\u0022. Please set \u0022isolatedModules: true\u0022 in your tsconfig.json. To disable this message, you can set \u0022diagnostics.ignoreCodes\u0022 to include 151002 in your ts-jest config. See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/options/diagnostics\r\nts-jest[config] (WARN) \u001B[94mmessage\u001B[0m\u001B[90m TS151002: \u001B[0mUsing hybrid module kind (Node16/18/Next) is only supported in \u0022isolatedModules: true\u0022. Please set \u0022isolatedModules: true\u0022 in your tsconfig.json. To disable this message, you can set \u0022diagnostics.ignoreCodes\u0022 to include 151002 in your ts-jest config. See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/options/diagnostics\r\nts-jest[config] (WARN) \u001B[94mmessage\u001B[0m\u001B[90m TS151002: \u001B[0mUsing hybrid module kind (Node16/18/Next) is only supported in \u0022isolatedModules: true\u0022. Please set \u0022isolatedModules: true\u0022 in your tsconfig.json. To disable this message, you can set \u0022diagnostics.ignoreCodes\u0022 to include 151002 in your ts-jest config. See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/options/diagnostics\r\nts-jest[config] (WARN)\n\u2026[truncated]",
+        "durationMs": 11344,
+        "testResults": {
+          "testFramework": "jest",
+          "runnerDetectedFrom": "package_json",
+          "testsTotal": 22,
+          "testsPassed": 22,
+          "testsFailed": 0,
+          "testsSkipped": 0,
+          "parseFailed": false
+        }
+      },
+      {
+        "name": "health-endpoint-200",
+        "kind": "http-probe",
+        "verificationMethod": "http-status",
+        "passed": true,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": null,
+        "outputSample": "HTTP 200\nOk\n--- server output ---\n\r\n\u003E animal-clinic-backend@1.0.0 start\r\n\u003E ts-node-dev --respawn ./src/server.ts\r\n\r\n[INFO] 13:32:02 ts-node-dev ver. 2.0.0 (using ts-node ver. 10.9.2, typescript ver. 6.0.3)\r\n\u001B[32m[2026-10-28T13:32:05.534] [INFO] server - \u001B[39mServer initialized on port - 3101\r\n\u001B[32m[2026-10-28T13:32:05.552] [INFO] DbRun - \u001B[39mConnection to database has been established successfully.\r\ntesttstsst\r\n",
+        "durationMs": 4091
+      }
+    ],
+    "executions": [
+      {
+        "source": "setup[0]",
+        "resolvedExecutable": "C:\\Users\\Usuario\\AppData\\Local\\Author Software\\nvm\\.nodejs\\npm.EXE",
+        "args": [
+          "ci",
+          "--prefer-offline",
+          "--no-audit",
+          "--no-fund"
+        ],
+        "cwd": "C:\\Users\\Usuario\\Documents\\WORKSPACE\\techDemo-iskaypet",
+        "env": {},
+        "prependPath": [],
+        "platform": "win32"
+      },
+      {
+        "source": "typescript-build",
+        "resolvedExecutable": "C:\\Users\\Usuario\\AppData\\Local\\Author Software\\nvm\\.nodejs\\npm.EXE",
+        "args": [
+          "run",
+          "build"
+        ],
+        "cwd": "C:\\Users\\Usuario\\Documents\\WORKSPACE\\techDemo-iskaypet",
+        "env": {},
+        "prependPath": [],
+        "platform": "win32"
+      },
+      {
+        "source": "tests-pass",
+        "resolvedExecutable": "C:\\Users\\Usuario\\AppData\\Local\\Author Software\\nvm\\.nodejs\\npm.EXE",
+        "args": [
+          "test",
+          "--",
+          "--runInBand"
+        ],
+        "cwd": "C:\\Users\\Usuario\\Documents\\WORKSPACE\\techDemo-iskaypet",
+        "env": {},
+        "prependPath": [],
+        "platform": "win32"
+      },
+      {
+        "source": "health-endpoint-200",
+        "resolvedExecutable": "C:\\Users\\Usuario\\AppData\\Local\\Author Software\\nvm\\.nodejs\\npm.EXE",
+        "args": [
+          "run",
+          "start"
+        ],
+        "cwd": "C:\\Users\\Usuario\\Documents\\WORKSPACE\\techDemo-iskaypet",
+        "env": {
+          "PORT": "3101"
+        },
+        "prependPath": [],
+        "platform": "win32"
+      }
+    ]
+  }
+}
