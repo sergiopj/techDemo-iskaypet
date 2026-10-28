@@ -1,6 +1,6 @@
 'use strict';
 import { Request, Response } from 'express';
-import { IPet } from '../database/models/pets/pet.model';
+import { IPet } from '../pets/infrastructure/persistence/pet.model';
 import {
   getAllPetsService,
   getPetByIdService,

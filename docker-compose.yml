@@ -18,10 +18,10 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '1'
+          cpus: "1"
           memory: 1024M
         reservations:
-          cpus: '0.5'
+          cpus: "0.5"
           memory: 512M
     command: sh -c "npm install && npm start"
 
@@ -33,5 +33,24 @@ services:
     volumes:
       - mongo-data:/data/db
 
+  postgres:
+    image: postgres:16-alpine
+    container_name: animal-clinic-postgres
+    environment:
+      POSTGRES_DB: animalClinic
+      POSTGRES_USER: "animalclinic"
+      POSTGRES_PASSWORD: "localdev"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    # cspell:ignore healthcheck
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U animalclinic -d animalClinic"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
 volumes:
   mongo-data:
+  postgres-data:

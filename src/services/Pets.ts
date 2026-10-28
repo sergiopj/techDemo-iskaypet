@@ -1,24 +1,19 @@
-'use strict';
-import { IPet, Pet } from '../database/models/pets/pet.model';
-import DbQueries from './DbQueries';
-import { Calculation } from './Calculation';
+"use strict";
+import { IPet, Pet } from "../pets/infrastructure/persistence/pet.model";
+import DbQueries from "./DbQueries";
+import { Calculation } from "./Calculation";
 
-
-// TODO esto llevar al sitio que toca
 /**
  * Function to get all pets
  * @returns {Promise<IPet[]>}
  */
 const getAllPetsService = async (): Promise<IPet[]> => {
-  try {    
+  try {
     const pets: IPet[] = await DbQueries.getAllElems();
-    return pets.length > 0 
-      ? pets 
-      : [];
+    return pets.length > 0 ? pets : [];
   } catch (error: unknown) {
-    const message: string = error instanceof Error 
-        ? error.message 
-        : 'Unknown Error';
+    const message: string =
+      error instanceof Error ? error.message : "Unknown Error";
     throw new Error(`Failed to get all pets - error: ${message}`);
   }
 };
@@ -31,13 +26,10 @@ const getAllPetsService = async (): Promise<IPet[]> => {
 const getPetByIdService = async (id: string): Promise<IPet | null> => {
   try {
     const pet: IPet | null = await DbQueries.findElemById(id);
-    return pet
-      ? pet
-      : null;
+    return pet ? pet : null;
   } catch (error: unknown) {
-    const message: string = error instanceof Error
-        ? error.message 
-        : 'Unknown Error';
+    const message: string =
+      error instanceof Error ? error.message : "Unknown Error";
     throw new Error(`Error getting pet by id - error: ${message}`);
   }
 };
@@ -51,29 +43,28 @@ const getMostNumerousSpeciesService = async (): Promise<any | null> => {
     const species = await Pet.aggregate([
       {
         $group: {
-          _id: '$species',
-          count: { $sum: 1 }
-        }
+          _id: "$species",
+          count: { $sum: 1 },
+        },
       },
       {
-        $sort: { count: -1 }
+        $sort: { count: -1 },
       },
       {
-        $limit: 1
+        $limit: 1,
       },
       {
         $project: {
           _id: 0,
-          species: '$_id',
-          count: 1
-        }
-      }
+          species: "$_id",
+          count: 1,
+        },
+      },
     ]);
     return species.length > 0 ? species[0] : null;
   } catch (error: unknown) {
-    const message: string = error instanceof Error
-        ? error.message 
-        : 'Unknown Error';
+    const message: string =
+      error instanceof Error ? error.message : "Unknown Error";
     throw new Error(`Error getting most numerous species - error: ${message}`);
   }
 };
@@ -82,16 +73,17 @@ const getMostNumerousSpeciesService = async (): Promise<any | null> => {
  * Function to obtain the average age among all pets
  * @returns {Promise<number>}
  */
-const getSpeciesAverageAgeService = async (species: string): Promise<number> => {
+const getSpeciesAverageAgeService = async (
+  species: string,
+): Promise<number> => {
   try {
     const querie = { species };
-    const pets: IPet[] = await DbQueries.findElemsByQuerie(querie); 
-    const averageAge: number = Calculation.calculateAverageAge(pets);   
-    return averageAge;      
+    const pets: IPet[] = await DbQueries.findElemsByQuerie(querie);
+    const averageAge: number = Calculation.calculateAverageAge(pets);
+    return averageAge;
   } catch (error: unknown) {
-    const message: string = error instanceof Error
-        ? error.message 
-        : 'Unknown Error';
+    const message: string =
+      error instanceof Error ? error.message : "Unknown Error";
     throw new Error(`Error getting species average age - error: ${message}`);
   }
 };
@@ -100,17 +92,21 @@ const getSpeciesAverageAgeService = async (species: string): Promise<number> => 
  * Function to obtain the standar deviation among all pets
  * @returns {Promise<number>}
  */
-const getSpecieAgeStandarDeviationService = async (species: string): Promise<number> => {
+const getSpecieAgeStandarDeviationService = async (
+  species: string,
+): Promise<number> => {
   try {
     const querie = { species };
     const pets: IPet[] = await DbQueries.findElemsByQuerie(querie);
-    const standarDeviation: number = Calculation.calculateStandarDeviation(pets);    
-    return standarDeviation;  
+    const standarDeviation: number =
+      Calculation.calculateStandarDeviation(pets);
+    return standarDeviation;
   } catch (error: unknown) {
-    const message: string = error instanceof Error
-        ? error.message 
-        : 'Unknown Error';
-    throw new Error(`Error getting species standar deviation - error: ${message}`);
+    const message: string =
+      error instanceof Error ? error.message : "Unknown Error";
+    throw new Error(
+      `Error getting species standar deviation - error: ${message}`,
+    );
   }
 };
 
@@ -124,16 +120,15 @@ const addNewPetService = async (data: Partial<IPet>): Promise<IPet> => {
     const { species, gender, name, birthdate } = data;
     const pet = {
       name,
-      species: species?.toLocaleLowerCase(),
-      gender: gender?.toLocaleLowerCase(),
+      species: species?.toLocaleLowerCase() as IPet["species"],
+      gender: gender?.toLocaleLowerCase() as IPet["gender"],
       birthdate,
-    }
+    };
     const result: IPet = await DbQueries.insertData(pet);
     return result;
   } catch (error) {
-    const message: string = error instanceof Error 
-      ? error.message
-      : 'Unknown Error';   
+    const message: string =
+      error instanceof Error ? error.message : "Unknown Error";
     throw new Error(`Error adding new pet- error: ${message}`);
   }
 };

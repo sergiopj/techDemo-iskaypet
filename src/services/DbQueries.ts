@@ -1,6 +1,6 @@
 'use strict';
 
-import { IPet, Pet } from '../database/models/pets/pet.model';
+import { IPet, Pet } from '../pets/infrastructure/persistence/pet.model';
 import { FilterQuery } from 'mongoose';
 
 // TODO esto no creo que deba estar aqui
