@@ -12,18 +12,21 @@ describe('PetsService', () => {
 
   describe('addNewPetService', () => {
     it('Validating that a pet has been inserted into the database', async () => {
-      const petDataToInsert: any = INSERT_PET_OBJECT;
+      const petDataToInsert: any = {
+        ...INSERT_PET_OBJECT,
+        birthdate: new Date(INSERT_PET_OBJECT.birthdate),
+      };
       const dbQueriesMock = jest.spyOn(DbQueries, 'insertData'); 
       dbQueriesMock.mockImplementationOnce(async () => petDataToInsert);
-      const result: any = await addNewPetService(INSERT_PET_OBJECT); 
+      const result: any = await addNewPetService(petDataToInsert); 
       expectValidatorInsertPetsObject(result);
     });
   });
 
   describe('getPetByIdService', () => {
     it('Validating that a pet object meets some requirements', async () => {
-      const petId = 1;
-      const dbPetObject: any = PET_OBJECT_DB;
+      const petId = '641a2b3c4d5e6f7g8h9i0j1k';
+      const dbPetObject: any = { ...PET_OBJECT_DB, id: petId };
       const dbQueriesMock = jest.spyOn(DbQueries, 'findElemById'); 
       dbQueriesMock.mockImplementationOnce(async () => dbPetObject);
       const pet: any = await getPetByIdService(petId);
@@ -33,7 +36,10 @@ describe('PetsService', () => {
 
   describe('getAllPetsService', () => {
     it('Validating that the list of pets meets certain requirements', async () => {
-      const dbPetsListObject: any = PET_OBJECT_LIST;
+      const dbPetsListObject: any = PET_OBJECT_LIST.map((pet) => ({
+        ...pet,
+        id: pet._id,
+      }));
       const dbQueriesMock = jest.spyOn(DbQueries, 'getAllElems'); 
       dbQueriesMock.mockImplementationOnce(async () => dbPetsListObject);
       const pets: any = await getAllPetsService();

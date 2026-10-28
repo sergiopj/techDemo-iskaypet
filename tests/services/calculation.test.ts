@@ -4,9 +4,17 @@ import { PET_OBJECT_DB_LIST } from '../common/mocks/pet.mock';
 
 describe('ArithmeticCalcService', () => {  
 
+  beforeEach(() => {
+    jest.useFakeTimers().setSystemTime(new Date('2023-03-16'));
+  });
+
+  afterEach(() => {
+    jest.useRealTimers();
+  });
+
   describe('calculateAgeInYears', () => {
     it('validation of whether the number of years is received correctly from a date of birth', async () => {
-      const years: number = await Calculation.calculateAgeInYears('2000-03-15');    
+      const years: number = await Calculation.calculateAgeInYears(new Date('2000-03-15'));    
       expect(typeof years).toBe('number');
       expect(years).toBeGreaterThan(0);
     });
@@ -26,7 +34,7 @@ describe('ArithmeticCalcService', () => {
       const dbPetList: any = PET_OBJECT_DB_LIST;
       const averageAge: number = await Calculation.calculateAverageAge(dbPetList);    
       expect(typeof averageAge).toBe('number');
-      expect(averageAge).toBe(10);
+      expect(averageAge).toBe(8);
     });
   });
 
