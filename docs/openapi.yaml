@@ -4,8 +4,8 @@ info:
   title: Animal Clinic API
   version: 1.0.0
   description: >
-    Target API contract. JWT authentication is planned but has not yet been
-    implemented.
+    Target API contract. JWT authentication with Auth0 Bearer tokens is
+    configured. Clinic-scoped authorization remains to be implemented.
 
 servers:
   - url: http://localhost:3000/api/v1

@@ -12,7 +12,7 @@ describe("GetAllPetsUseCase", () => {
         name: "Luna",
         species: Species.Cat,
         gender: Gender.Female,
-        birthdate: new Date("2020-05-10"),
+        birthdate: "2020-05-10",
       },
     ];
     const petRepository: PetRepository = {

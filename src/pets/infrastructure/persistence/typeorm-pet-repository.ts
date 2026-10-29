@@ -18,7 +18,7 @@ export class TypeOrmPetRepository implements PetRepository {
       name: entity.name,
       species: entity.species,
       gender: entity.gender,
-      birthdate: new Date(entity.birthdate),
+      birthdate: entity.birthdate,
     }));
   }
 }

@@ -21,4 +21,21 @@ export class Auth0JwtAuthGuard extends AuthGuard("auth0-jwt") {
 
     return super.canActivate(context);
   }
+
+  handleRequest<TUser = any>(
+    err: any,
+    user: any,
+    info: any,
+    context: ExecutionContext,
+    status?: any,
+  ): TUser {
+    if (err || !user) {
+      console.error("[Auth0JwtAuthGuard] Authentication failed:", {
+        error: err?.message || err,
+        info: info?.message || info,
+      });
+    }
+
+    return super.handleRequest(err, user, info, context, status);
+  }
 }

@@ -6,7 +6,7 @@ as they are designed.
 
 ## Current endpoint
 
-- `GET /api/v1/pets` — returns the pets as a JSON array.
+- `GET /api/v1/pets` — returns the pets as a JSON array (protected with Auth0 JWT).
 - `GET /api/v1/docs` — interactive OpenAPI documentation.
 
 ## Architecture
@@ -16,15 +16,17 @@ repository port, and PostgreSQL/TypeORM adapter.
 
 ## Security
 
-Authentication and authorization have not been added yet. Choose the mechanism
-before introducing business routes that need access control; do not expose this
-development API publicly until that decision and its protections are in place.
+Authentication is implemented with Auth0 JWT access tokens (RS256/JWKS). Protected endpoints require a valid Bearer token.
+Local authorization, clinic tenant isolation, and role resolution (`clinic_user`, `clinic_admin`, etc.) remain to be implemented in subsequent phases.
 
 ## Run locally
 
 Requirements: Node.js 20 or later and PostgreSQL.
 
-1. Configure the database values in `.env` using `.env.example` as a reference.
+1. Configure the database and Auth0 values in `.env` using `.env.example` as a reference:
+   - `DB_HOST`, `DB_PORT`, `DB_USERNAME`, `DB_PASSWORD`, `DB_NAME`
+   - `AUTH0_ISSUER_URL`: e.g. `https://<tenant>.<region>.auth0.com/`
+   - `AUTH0_AUDIENCE`: e.g. `https://api.animal-clinic`
 2. Apply the database migrations:
 
    ```console
@@ -48,7 +50,7 @@ The API listens on port `3000` by default. Set `PORT` to override it.
 
 ## Run with Docker Compose
 
-Set `DB_PASSWORD` in the local `.env` file, then run:
+Set `DB_PASSWORD`, `AUTH0_ISSUER_URL`, and `AUTH0_AUDIENCE` in the local `.env` file, then run:
 
 ```console
 docker compose up --build

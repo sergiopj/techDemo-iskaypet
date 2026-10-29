@@ -16,5 +16,5 @@ export interface Pet {
   name: string;
   species: Species;
   gender: Gender;
-  birthdate: Date;
+  birthdate: string;
 }

@@ -14,12 +14,6 @@ export class PetsController {
   async findAll(): Promise<PetResponseDto[]> {
     const pets = await this.getAllPetsUseCase.execute();
 
-    return pets.map((pet) => ({
-      id: pet.id,
-      name: pet.name,
-      species: pet.species,
-      gender: pet.gender,
-      birthdate: pet.birthdate.toISOString(),
-    }));
+    return pets.map(PetResponseDto.fromDomain);
   }
 }
