@@ -10,6 +10,14 @@ async function bootstrap() {
     .setTitle("Animal Clinic API")
     .setDescription("HTTP API for the animal clinic backend")
     .setVersion("1.0")
+    .addBearerAuth(
+      {
+        type: "http",
+        scheme: "bearer",
+        bearerFormat: "JWT",
+      },
+      "bearerAuth",
+    )
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup("docs", app, document, { useGlobalPrefix: true });

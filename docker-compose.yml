@@ -10,6 +10,8 @@ services:
       DB_USERNAME: animalclinic
       DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in your local .env file}
       DB_NAME: animalClinic
+      AUTH0_ISSUER_URL: ${AUTH0_ISSUER_URL:?Set AUTH0_ISSUER_URL in your local .env file}
+      AUTH0_AUDIENCE: ${AUTH0_AUDIENCE:?Set AUTH0_AUDIENCE in your local .env file}
     ports:
       - "3000:3000"
     depends_on:
