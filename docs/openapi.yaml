@@ -1,0 +1,108 @@
+openapi: 3.1.0
+
+info:
+  title: Animal Clinic API
+  version: 1.0.0
+  description: >
+    Target API contract. JWT authentication is planned but has not yet been
+    implemented.
+
+servers:
+  - url: http://localhost:3000/api/v1
+    description: Local development
+
+security:
+  - bearerAuth: []
+
+paths:
+  /pets:
+    get:
+      operationId: listPets
+      summary: List pets
+      description: >
+        Target behavior: lists pets available in the clinic context authorized
+        for the authenticated user. Membership in another clinic does not grant
+        access to this clinic's pets. Clinic authorization is not implemented
+        yet.
+      tags:
+        - Pets
+      responses:
+        "200":
+          description: A list of pets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Pet"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Pet:
+      type: object
+      required:
+        - id
+        - name
+        - species
+        - gender
+        - birthdate
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          example: Luna
+        species:
+          type: string
+          enum: [dog, cat, fish, bird, reptile]
+        gender:
+          type: string
+          enum: [male, female]
+        birthdate:
+          type: string
+          format: date
+          example: "2020-03-15"
+
+    Problem:
+      type: object
+      required:
+        - type
+        - title
+        - status
+      properties:
+        type:
+          type: string
+          format: uri
+        title:
+          type: string
+        status:
+          type: integer
+        detail:
+          type: string
+        instance:
+          type: string
+
+  responses:
+    Unauthorized:
+      description: The JWT is missing or invalid
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+    Forbidden:
+      description: The authenticated user is not allowed to perform this operation
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"

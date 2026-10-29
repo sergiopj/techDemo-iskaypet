@@ -38,6 +38,73 @@
 - Use `409 Conflict` when the request conflicts with the current state of a resource.
 - Use `500 Internal Server Error` for unexpected server errors.
 
+## Security and authorization
+
+- Protected endpoints require an authenticated user. JWT access tokens issued by
+  an external identity provider are planned; Auth0 is the current candidate,
+  subject to confirming the provider and its operational requirements before
+  implementation.
+- Document the authentication and authorization requirements for every endpoint.
+  Explicitly identify public endpoints, such as health checks or API
+  documentation, rather than assuming they are public.
+- Return `401 Unauthorized` when credentials are missing or invalid, and
+  `403 Forbidden` when an authenticated user lacks permission.
+- Never include credentials, access tokens, or other secrets in API responses or
+  logs. Do not expose internal authentication or authorization details.
+
+### JWT access tokens
+
+- Send access tokens using the `Authorization: Bearer <access-token>` header.
+- Accept only access tokens issued for this API; do not accept ID tokens as API
+  credentials.
+- Validate the token signature, allowed signing algorithm, issuer, audience, and
+  time claims, including expiration, before accepting it.
+- Link an external identity to a local account using the validated issuer (`iss`)
+  and subject (`sub`), not email alone. Do not store or validate user passwords
+  in this API.
+- A valid token establishes identity, not access to business data. Resolve
+  account status, clinic memberships, and permissions from trusted local
+  authorization data; never trust roles or clinic identifiers supplied only by
+  the client.
+- Do not send tokens in URLs or include them in logs or API responses. Use HTTPS
+  for requests carrying tokens.
+- Use the identity provider's documented signing-key discovery and rotation
+  mechanisms. Do not hardcode signing secrets.
+
+### Clinics, roles, and authorization
+
+- Treat clinic-owned data as tenant-scoped: an authenticated user may access
+  records only within a clinic to which they belong and are authorized.
+- Determine the clinic scope from the authenticated user's authorized context.
+  Do not rely solely on a client-supplied clinic identifier in a path, query, or
+  request body to grant access.
+- Evaluate authorization for the clinic relevant to each request, including
+  when a user belongs to multiple clinics.
+- Ensure that authorization checks prevent cross-clinic access, including for
+  reads, updates, and deletes. Avoid revealing whether another clinic's
+  resources exist.
+- Sibling clinics may access only explicitly shared basic clinic information;
+  membership in one clinic does not grant access to another clinic's pets,
+  staff, or clinical records.
+- Add tests for unauthenticated access, insufficient permissions, permitted
+  clinic access, and cross-clinic access whenever protected routes are
+  implemented.
+
+The following initial roles are planned; refine their permissions as clinic
+workflows are defined:
+
+- `clinic_user`: may manage pets and clinical records within their authorized
+  clinic.
+- `clinic_admin`: has `clinic_user` permissions and may manage users and
+  settings for their clinic.
+- `group_admin`: may manage clinics within their group. Access to clinical
+  records across clinics must be explicitly authorized and audited.
+- `platform_admin`: platform-wide operational access is out of scope for the
+  initial implementation.
+- Do not introduce a global `admin` role by default. Keep clinic-level and
+  group-level administration distinct from any future platform-wide
+  administration.
+
 ## Request validation
 
 - Validate all client-provided path parameters, query parameters, and request bodies.

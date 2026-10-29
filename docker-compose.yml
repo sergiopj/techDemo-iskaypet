@@ -2,19 +2,19 @@ services:
   app:
     container_name: api
     build: .
-    env_file: .env.example
     environment:
-      - PORT=3000
-      - MONGO_URI=mongodb://mongo:27017/animalClinic
-      - NODE_ENV=development
-      - FRONT_HOST=http://localhost:4200
+      NODE_ENV: development
+      PORT: 3000
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USERNAME: animalclinic
+      DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in your local .env file}
+      DB_NAME: animalClinic
     ports:
       - "3000:3000"
-    volumes:
-      - .:/app
-      - /app/node_modules
     depends_on:
-      - mongo
+      postgres:
+        condition: service_healthy
     deploy:
       resources:
         limits:
@@ -23,15 +23,7 @@ services:
         reservations:
           cpus: "0.5"
           memory: 512M
-    command: sh -c "npm install && npm start"
-
-  mongo:
-    image: mongo:latest
-    container_name: mongo
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo-data:/data/db
+    command: npm start
 
   postgres:
     image: postgres:16-alpine
@@ -52,5 +44,4 @@ services:
       retries: 10
 
 volumes:
-  mongo-data:
   postgres-data:
