@@ -1,13 +1,14 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { GetAllPetsUseCase } from "./application/use-cases/get-all-pets.use-case";
-import { PetEntity } from "./infrastructure/persistence/pet.entity";
-import { TypeOrmPetRepository } from "./infrastructure/persistence/typeorm-pet-repository";
-import { PetRepository } from "./application/ports/pet.repository";
-import { PetsController } from "./infrastructure/http/pets.controller";
-
-// Token used by NestJS to inject the PetRepository port adapter.
-export const PET_REPOSITORY = Symbol("PET_REPOSITORY");
+import { PetEntity } from "./infrastructure/out/persistence/pet.entity";
+import { TypeOrmPetRepository } from "./infrastructure/out/persistence/typeorm-pet.repository";
+import { PetsController } from "./infrastructure/in/http/pets.controller";
+import {
+  PetRepositoryPort,
+  PET_REPOSITORY,
+} from "./application/ports/out/pet-repository.port";
+import { GET_ALL_PETS_USE_CASE } from "./application/ports/in/get-all-pets.port";
 
 @Module({
   imports: [TypeOrmModule.forFeature([PetEntity])],
@@ -17,8 +18,8 @@ export const PET_REPOSITORY = Symbol("PET_REPOSITORY");
       useClass: TypeOrmPetRepository,
     },
     {
-      provide: GetAllPetsUseCase,
-      useFactory: (repository: PetRepository) =>
+      provide: GET_ALL_PETS_USE_CASE,
+      useFactory: (repository: PetRepositoryPort) =>
         new GetAllPetsUseCase(repository),
       inject: [PET_REPOSITORY],
     },

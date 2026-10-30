@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { DataSource } from "typeorm";
-import { PetEntity } from "../../pets/infrastructure/persistence/pet.entity";
+import { PetEntity } from "../../pets/infrastructure/out/persistence/pet.entity";
 
 export default new DataSource({
   type: "postgres",

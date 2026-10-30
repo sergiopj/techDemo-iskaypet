@@ -1,7 +1,7 @@
 import { describe, expect, it, jest } from "@jest/globals";
 import { GetAllPetsUseCase } from "../../../../src/pets/application/use-cases/get-all-pets.use-case";
-import { PetRepository } from "../../../../src/pets/application/ports/pet.repository";
 import { Gender, Pet, Species } from "../../../../src/pets/domain/pet";
+import { PetRepositoryPort } from "../../../../src/pets/application/ports/out/pet-repository.port";
 
 describe("GetAllPetsUseCase", () => {
   it("returns pets from the repository", async () => {
@@ -15,7 +15,7 @@ describe("GetAllPetsUseCase", () => {
         birthdate: "2020-05-10",
       },
     ];
-    const petRepository: PetRepository = {
+    const petRepository: PetRepositoryPort = {
       findAll: jest.fn<() => Promise<Pet[]>>().mockResolvedValue(pets),
     };
     const useCase = new GetAllPetsUseCase(petRepository);

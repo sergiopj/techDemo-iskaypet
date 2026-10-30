@@ -1,10 +1,10 @@
 import { InjectRepository } from "@nestjs/typeorm";
-import { PetRepository } from "../../application/ports/pet.repository";
+import { PetRepositoryPort } from "../../../application/ports/out/pet-repository.port";
 import { PetEntity } from "./pet.entity";
 import { Repository } from "typeorm";
-import { Pet as DomainPet } from "../../domain/pet";
+import { Pet as DomainPet } from "../../../domain/pet";
 
-export class TypeOrmPetRepository implements PetRepository {
+export class TypeOrmPetRepository implements PetRepositoryPort {
   constructor(
     @InjectRepository(PetEntity)
     private readonly petEntityRepository: Repository<PetEntity>,

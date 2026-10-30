@@ -1,8 +1,9 @@
 import { Pet } from "../../domain/pet";
-import { PetRepository } from "../ports/pet.repository";
+import { PetRepositoryPort } from "../ports/out/pet-repository.port";
+import { GetAllPetsUseCasePort } from "../ports/in/get-all-pets.port";
 
-export class GetAllPetsUseCase {
-  constructor(private readonly petRepository: PetRepository) {}
+export class GetAllPetsUseCase implements GetAllPetsUseCasePort {
+  constructor(private readonly petRepository: PetRepositoryPort) {}
 
   execute(): Promise<Pet[]> {
     return this.petRepository.findAll();

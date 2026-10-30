@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { Gender, Species } from "../../domain/pet";
+import { Gender, Species } from "../../../domain/pet";
 
 @Entity({ name: "pets" })
 export class PetEntity {

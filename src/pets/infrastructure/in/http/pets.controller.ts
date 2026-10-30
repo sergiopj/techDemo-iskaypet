@@ -1,12 +1,18 @@
-import { Controller, Get } from "@nestjs/common";
+import { Controller, Get, Inject } from "@nestjs/common";
 import { ApiOkResponse, ApiOperation, ApiTags } from "@nestjs/swagger";
-import { GetAllPetsUseCase } from "../../application/use-cases/get-all-pets.use-case";
+import {
+  GetAllPetsUseCasePort,
+  GET_ALL_PETS_USE_CASE,
+} from "../../../application/ports/in/get-all-pets.port";
 import { PetResponseDto } from "./dto/pet-response.dto";
 
 @Controller("pets")
 @ApiTags("Pets")
 export class PetsController {
-  constructor(private readonly getAllPetsUseCase: GetAllPetsUseCase) {}
+  constructor(
+    @Inject(GET_ALL_PETS_USE_CASE)
+    private readonly getAllPetsUseCase: GetAllPetsUseCasePort,
+  ) {}
 
   @Get()
   @ApiOperation({ summary: "List all pets" })

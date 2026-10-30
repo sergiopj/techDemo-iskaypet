@@ -1,8 +1,11 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Gender, Pet, Species } from "../../../domain/pet";
+import { Gender, Pet, Species } from "../../../../domain/pet";
 
 export class PetResponseDto {
-  @ApiProperty({ format: "uuid", example: "b3b0b3b1-5b2a-4b2a-9b1a-123456789abc" })
+  @ApiProperty({
+    format: "uuid",
+    example: "b3b0b3b1-5b2a-4b2a-9b1a-123456789abc",
+  })
   id!: string;
 
   @ApiProperty({ example: "Luna" })
